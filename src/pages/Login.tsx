@@ -1,3 +1,9 @@
+import {
+  addNewDataToDatabse,
+  getDataFromDatabase,
+  updateDataInDatabase,
+} from "../hooks/Firebase";
+
 interface Props {
   setUser: (e: any) => void;
 }

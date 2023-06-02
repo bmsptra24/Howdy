@@ -6,6 +6,6 @@ export interface IsMenuClickedType {
 }
 
 export function IsMenuClickedState() {
-  const [IsMenuClicked, setIsMenuClicked] = useState(true);
+  const [IsMenuClicked, setIsMenuClicked] = useState(false);
   return { IsMenuClicked, setIsMenuClicked };
 }
