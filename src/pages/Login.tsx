@@ -1,15 +1,15 @@
-import {
-  addNewDataToDatabse,
-  getDataFromDatabase,
-  updateDataInDatabase,
-} from "../hooks/Firebase";
+// import {
+//   addNewDataToDatabse,
+//   getDataFromDatabase,
+//   updateDataInDatabase,
+// } from "../hooks/Firebase";
 
-interface Props {
-  setUser: (e: any) => void;
-}
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { FaHatCowboy } from "react-icons/fa";
-const Login = ({ setUser }: Props) => {
+
+const Login = () => {
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-br from-sky-200 to-sky-400 ">
       <div className="flex flex-col items-center curso">
@@ -19,9 +19,7 @@ const Login = ({ setUser }: Props) => {
         </div>
         <div
           className="ease-out duration-300 flex justify-center mt-6 bg-sky-400 border-sky-500 border px-4 py-2 rounded-full hover:scale-110 hover:bg-sky-500 cursor-pointer"
-          onClick={() => {
-            setUser((e: boolean) => !e);
-          }}
+          onClick={() => loginWithRedirect()}
         >
           <p className="text-xl select-none group">login with google</p>
         </div>
