@@ -1,19 +1,23 @@
-import { useState, lazy, Suspense } from "react";
-import { AiOutlineLoading } from "react-icons/ai";
+import { lazy, Suspense } from "react";
 import "./App.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "./components/Loading";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Login = lazy(() => import("./pages/Login"));
+
 function App() {
-  const [user, setUser] = useState(false);
+  const { isAuthenticated, isLoading, error } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <h1>Opps...404</h1>;
+  }
+
   return (
-    <Suspense
-      fallback={
-        <div className="bg-gradient-to-br from-sky-200 to-sky-400 w-screen h-screen flex justify-center items-center ">
-          <AiOutlineLoading className="text-sky-700 text-7xl animate-spin" />
-        </div>
-      }
-    >
-      <div>{user ? <HomePage /> : <Login setUser={setUser} />}</div>
+    <Suspense fallback={<Loading />}>
+      <div>{isAuthenticated ? <HomePage /> : <Login />}</div>
     </Suspense>
   );
 }
